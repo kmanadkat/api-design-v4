@@ -28,6 +28,6 @@ export const protect = (req, res, next) => {
 		return;
 	} catch (error) {
 		console.error(error.message);
-		return res.status(401).json({ message: 'Not authorized' });
+		return res.status(401).json({ message: 'Not valid token' });
 	}
 };
