@@ -7,3 +7,27 @@ export const createJWT = (user) => {
 	);
 	return token;
 };
+
+export const protect = (req, res, next) => {
+	const bearer = req.headers.authorization;
+
+	if (!bearer) {
+		return res.status(401).json({ message: 'Not authorized' });
+	}
+
+	const [, token] = bearer.split(' ');
+	if (!token) {
+		return res.status(401).json({ message: 'Not authorized' });
+	}
+
+	try {
+		const payload = jwt.verify(token, process.env.JWT_SECRET);
+		req.user = payload;
+		console.log(payload);
+		next();
+		return;
+	} catch (error) {
+		console.error(error.message);
+		return res.status(401).json({ message: 'Not authorized' });
+	}
+};
