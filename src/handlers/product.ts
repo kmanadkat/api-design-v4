@@ -22,5 +22,48 @@ export const getOneProduct = async (req, res) => {
 		},
 	});
 
-	res.json({ data: product });
+	return res.json({ data: product });
+};
+
+// Create Product
+export const createProduct = async (req, res) => {
+	const product = await prisma.product.create({
+		data: {
+			name: req.body.name,
+			belongsToId: req.user.id,
+		},
+	});
+
+	return res.json({ data: product });
+};
+
+// Update Product
+export const updateProduct = async (req, res) => {
+	const productId = req.params.id;
+	const updated = await prisma.product.update({
+		where: {
+			id_belongsToId: {
+				id: productId,
+				belongsToId: req.user.id,
+			},
+		},
+		data: {
+			name: req.body.name,
+		},
+	});
+
+	return res.json({ data: updated });
+};
+
+// Delete Product
+export const deleteProduct = async (req, res) => {
+	const productId = req.params.id;
+	const deleted = await prisma.product.delete({
+		where: {
+			id_belongsToId: {
+				id: productId,
+				belongsToId: req.user.id,
+			},
+		},
+	});
 };
