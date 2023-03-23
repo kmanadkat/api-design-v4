@@ -5,3 +5,9 @@ This is frontendmasters [course](https://frontendmasters.com/courses/api-design-
 ### Resources
 
 - [Course Website](https://hendrixer.github.io/API-design-v4)
+
+### Deployment
+
+Project deployed on [render.com](render.com) using free tier.
+
+![](./deployment.png)
