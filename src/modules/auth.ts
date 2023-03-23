@@ -37,6 +37,9 @@ export const comparePasswords = (password, hash) => {
 };
 
 export const hashPassword = (password) => {
-	const salt = bcrypt.genSaltSync(10);
-	return bcrypt.hash(password, salt);
+	return new Promise((resolve, reject) => {
+		bcrypt.genSalt(10).then((salt) => {
+			resolve(bcrypt.hash(password, salt));
+		});
+	});
 };
