@@ -95,4 +95,9 @@ router.put(
 
 router.delete('/updatepoints/:id', (req, res) => {});
 
+// Error Handling
+router.use((err, req, res, next) => {
+	next(err);
+});
+
 export default router;
